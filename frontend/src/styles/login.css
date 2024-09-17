@@ -1,0 +1,36 @@
+/* input.css */
+.input-container {
+  position: relative;
+  margin-top: 16px;
+}
+
+.input-field {
+  width: 100%;
+  padding: 12px 16px 8px;
+  border-bottom: 2px solid #d1d5db; /* Tailwind's gray-300 */
+  transition: border-color 0.3s ease;
+}
+
+.input-field:focus {
+  outline: none;
+  border-color: #3b82f6; /* Tailwind's blue-500 */
+}
+
+.input-label {
+  position: absolute;
+  left: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 1rem;
+  color: #9ca3af; /* Tailwind's gray-400 */
+  pointer-events: none;
+  transition: all 0.3s ease;
+}
+
+.input-field:focus ~ .input-label,
+.input-field:not(:placeholder-shown) ~ .input-label {
+  top: 0;
+  transform: translateY(-100%);
+  font-size: 0.75rem; /* Tailwind's text-xs */
+  color: #3b82f6; /* Tailwind's blue-500 */
+}
