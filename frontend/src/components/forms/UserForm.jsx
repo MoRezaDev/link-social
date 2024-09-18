@@ -7,10 +7,9 @@ function UserForm({ modalRef, onClose }) {
   const [category, setCategory] = useState("");
   const [username, setUsername] = useState("");
   const domain = "https://yourdomain.com";
-  const resultRef = useRef({});
+
   const handleCopy = () => {
     const textToCopy = `${domain}${category ? `/${category}` : ""}/${username}`;
-    resultRef.current = textToCopy;
     navigator.clipboard.writeText(textToCopy).then(() => {
       toast.success("Copied to clipboard!");
     });
@@ -18,7 +17,24 @@ function UserForm({ modalRef, onClose }) {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    
+
+    if (username.length === 0) {
+      return toast.error("Username should not be empty");
+    }
+
+    const newUser = {
+      name: username,
+      url: `${domain}${category ? `/${category}` : ""}/${username}`,
+    };
+
+    const existingUsers = JSON.parse(localStorage.getItem("users")) || [];
+
+    existingUsers.push(newUser);
+
+    localStorage.setItem("users", JSON.stringify(existingUsers));
+
+    toast.success("Successfully Saved to local storage!");
+    setTimeout(() => location.reload(), 1000);
   };
 
   return (
