@@ -9,6 +9,7 @@ import Links from "./pages/Links";
 import Design from "./pages/Design";
 import Share from "./pages/Share";
 import Preview from "./pages/Preview";
+import User from "./pages/User";
 
 export const router = createBrowserRouter([
   {
@@ -28,6 +29,10 @@ export const router = createBrowserRouter([
             element: <DashLayout />,
             children: [
               { index: true, element: <Dashboard /> },
+              {
+                path: "/dashboard/user",
+                element: <User />,
+              },
               {
                 path: "/dashboard/links",
                 element: <Links />,
