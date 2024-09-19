@@ -38,20 +38,6 @@ function Navbar() {
           </NavLink>
 
           <NavLink
-            to="/dashboard/links"
-            className={({ isActive }) =>
-              `relative flex flex-col items-center gap-1 justify-center w-24 ${
-                isActive
-                  ? "text-[#00bbff] border-b-2 border-b-[#00bbff]"
-                  : "text-black"
-              } hover:bg-gray-100 transition-all ease-linear duration-200 px-4 py-2`
-            }
-          >
-            <FaLink className="text-xl mb-1" />
-            <span>Links</span>
-          </NavLink>
-
-          <NavLink
             to="/dashboard/design"
             className={({ isActive }) =>
               `relative flex flex-col items-center gap-1 justify-center w-24 ${

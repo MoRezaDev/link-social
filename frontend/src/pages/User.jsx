@@ -15,15 +15,16 @@ function User() {
   }, [initialUsers]);
 
   const onDelete = (user) => {
-    const filteredUsers = users.filter((us) => us.name !== user.name);
+    const filteredUsers = users.filter((us) => us.id !== user.id);
     toast.success(`User "${user.name}" deleted`, { duration: 1000 });
     localStorage.setItem("users", JSON.stringify(filteredUsers));
     setUsers(filteredUsers);
   };
+
   return (
     <section className="flex items-center flex-col justify-center">
-      {users?.map((user, idx) => (
-        <UserCard key={idx} user={user} onDelete={onDelete} />
+      {users?.map((user) => (
+        <UserCard key={user.id} user={user} onDelete={onDelete} />
       ))}
       <AddUserButton />
     </section>

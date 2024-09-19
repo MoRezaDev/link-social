@@ -5,7 +5,6 @@ import Login from "./pages/Login";
 import Layout from "./layout/Layout";
 import Notfound from "./features/Notfound";
 import DashLayout from "./layout/Dashboard/DashLayout";
-import Links from "./pages/Links";
 import Design from "./pages/Design";
 import Share from "./pages/Share";
 import Preview from "./pages/Preview";
@@ -32,10 +31,6 @@ export const router = createBrowserRouter([
               {
                 path: "/dashboard/user",
                 element: <User />,
-              },
-              {
-                path: "/dashboard/links",
-                element: <Links />,
               },
               {
                 path: "/dashboard/design",

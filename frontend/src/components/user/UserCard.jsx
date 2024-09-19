@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import { FaEdit, FaTrash, FaUserEdit } from "react-icons/fa";
 import AddLinksButton from "../buttons/AddLinksButton";
+import EditUserButton from "../buttons/EditUserButton";
 
-function UserCard({ user, onDelete, onAddLink }) {
+function UserCard({ user, onDelete }) {
   return (
     <div className="w-full max-w-[600px] rounded overflow-hidden shadow-lg bg-white p-4 m-4 relative">
       {/* Header with Delete Button */}
@@ -23,13 +24,7 @@ function UserCard({ user, onDelete, onAddLink }) {
           </p>
         </div>
         <div className="flex gap-3 items-center justify-center">
-          <button
-            onClick={() => onDelete(user)}
-            className="text-[#00bbff] hover:text-blue-500"
-            title="Edit User"
-          >
-            <FaUserEdit size={16} />
-          </button>
+          <EditUserButton user={user} />
           <button
             onClick={() => onDelete(user)}
             className="text-[#00bbff] hover:text-blue-500"
