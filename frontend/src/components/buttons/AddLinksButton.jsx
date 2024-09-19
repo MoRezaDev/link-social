@@ -4,7 +4,7 @@ import { FaPlus } from "react-icons/fa"; // Example icon, you can choose any ico
 import Modal from "../Modal";
 import LinkForm from "../forms/LinkForm";
 
-function AddLinksButton() {
+function AddLinksButton({ user }) {
   const [isModalOpen, setModalOpen] = useState(false);
 
   const modalRef = useRef();
@@ -22,7 +22,7 @@ function AddLinksButton() {
         <span>Add Link</span>
       </button>
       <Modal isOpen={isModalOpen} onClose={closeModal} modalRef={modalRef}>
-        <LinkForm modalRef={modalRef} onClose={closeModal} />
+        <LinkForm modalRef={modalRef} onClose={closeModal} user={user} />
       </Modal>
     </>
   );

@@ -2,11 +2,13 @@ import React, { useState, useRef } from "react";
 import { FaTimes } from "react-icons/fa";
 import { FaCopy } from "react-icons/fa";
 import { toast } from "react-hot-toast";
+import { v4 as uuidv4 } from "uuid";
 
 function UserForm({ modalRef, onClose }) {
   const [category, setCategory] = useState("");
   const [username, setUsername] = useState("");
-  const domain = "https://yourdomain.com";
+  const [isButtonDisabled, setIsButtonDisabled] = useState(false);
+  const domain = "https://mehrgan.com";
 
   const handleCopy = () => {
     const textToCopy = `${domain}${category ? `/${category}` : ""}/${username}`;
@@ -23,8 +25,10 @@ function UserForm({ modalRef, onClose }) {
     }
 
     const newUser = {
+      id: uuidv4(),
       name: username,
       url: `${domain}${category ? `/${category}` : ""}/${username}`,
+      links: [],
     };
 
     const existingUsers = JSON.parse(localStorage.getItem("users")) || [];
@@ -33,6 +37,7 @@ function UserForm({ modalRef, onClose }) {
 
     localStorage.setItem("users", JSON.stringify(existingUsers));
 
+    setIsButtonDisabled(true);
     toast.success("Successfully Saved to local storage!");
     setTimeout(() => location.reload(), 1000);
   };
@@ -104,6 +109,7 @@ function UserForm({ modalRef, onClose }) {
 
         {/* Save Button */}
         <button
+          disabled={isButtonDisabled ? true : false}
           type="submit"
           className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition-all duration-300"
         >

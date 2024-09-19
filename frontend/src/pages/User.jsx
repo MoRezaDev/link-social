@@ -16,7 +16,7 @@ function User() {
 
   const onDelete = (user) => {
     const filteredUsers = users.filter((us) => us.name !== user.name);
-    toast.error(`"deleted user ${user.name}"`);
+    toast.success(`User "${user.name}" deleted`, { duration: 1000 });
     localStorage.setItem("users", JSON.stringify(filteredUsers));
     setUsers(filteredUsers);
   };
