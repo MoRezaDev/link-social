@@ -7,7 +7,7 @@ function Layout() {
   return (
     <>
       <Header />
-      <div className="w-full h-[calc(100dvh-60px)]">
+      <div className="w-full min-h-[calc(100dvh-60px)]">
         <Outlet />
       </div>
       <Footer />

@@ -9,6 +9,7 @@ import Design from "./pages/Design";
 import Share from "./pages/Share";
 import Preview from "./pages/Preview";
 import User from "./pages/User";
+import Home from "./pages/Home";
 
 export const router = createBrowserRouter([
   {
@@ -17,40 +18,45 @@ export const router = createBrowserRouter([
     children: [
       {
         path: "/",
+        element: <Home />,
+        children: [],
+      },
+      {
+        path: "login",
+        element: <Login />,
+      },
+      {
+        path: "/admin",
         element: <ProtectedRoute />,
         children: [
           {
-            path: "/",
-            element: <Navigate to="/dashboard" replace />,
+            path: "/admin",
+            element: <Navigate to="/admin/dashboard" replace />,
           },
           {
-            path: "dashboard",
+            path: "/admin/dashboard",
             element: <DashLayout />,
             children: [
               { index: true, element: <Dashboard /> },
               {
-                path: "/dashboard/user",
+                path: "/admin/dashboard/user",
                 element: <User />,
               },
               {
-                path: "/dashboard/design",
+                path: "/admin/dashboard/design",
                 element: <Design />,
               },
               {
-                path: "/dashboard/share",
+                path: "/admin/dashboard/share",
                 element: <Share />,
               },
               {
-                path: "/dashboard/preview",
+                path: "/admin/dashboard/preview",
                 element: <Preview />,
               },
             ],
           },
         ],
-      },
-      {
-        path: "login",
-        element: <Login />,
       },
     ],
   },

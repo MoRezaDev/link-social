@@ -30,13 +30,11 @@ function UserEditForm({ modalRef, onClose, user }) {
     const usersTemp = users;
     const userIndex = usersTemp.findIndex((us) => us.id === user.id);
     if (userIndex !== -1) {
-      console.log("ok");
-      console.log(userIndex);
-      console.log(usersTemp[userIndex]);
       usersTemp[userIndex] = {
         ...users[userIndex],
         name: username,
         category,
+        url: `${domain}${category ? `/${category}` : ""}/${username}`,
       };
       console.log(usersTemp);
       localStorage.setItem("users", JSON.stringify(usersTemp));

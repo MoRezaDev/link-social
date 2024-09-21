@@ -42,7 +42,7 @@ function BurgerMenu() {
         >
           {/* Links for Small Devices */}
           <NavLink
-            to="/dashboard/user"
+            to="/admin/dashboard/user"
             className={({ isActive }) =>
               `block text-sm font-medium ${
                 isActive ? "text-[#00bbff]" : "text-black"
@@ -55,20 +55,7 @@ function BurgerMenu() {
           </NavLink>
 
           <NavLink
-            to="/dashboard/links"
-            className={({ isActive }) =>
-              `block text-sm font-medium ${
-                isActive ? "text-[#00bbff]" : "text-black"
-              } hover:bg-gray-100 py-2`
-            }
-            onClick={toggleMenu}
-          >
-            <FaLink className="inline mr-2" />
-            Links
-          </NavLink>
-
-          <NavLink
-            to="/dashboard/design"
+            to="/admin/dashboard/design"
             className={({ isActive }) =>
               `block text-sm font-medium ${
                 isActive ? "text-[#00bbff]" : "text-black"
@@ -81,7 +68,7 @@ function BurgerMenu() {
           </NavLink>
 
           <NavLink
-            to="/dashboard/share"
+            to="/admin/dashboard/share"
             className={({ isActive }) =>
               `block text-sm font-medium ${
                 isActive ? "text-[#00bbff]" : "text-black"
@@ -94,7 +81,7 @@ function BurgerMenu() {
           </NavLink>
 
           <NavLink
-            to="/dashboard/preview"
+            to="/admindashboard/preview"
             className={({ isActive }) =>
               `block text-sm font-medium ${
                 isActive ? "text-[#00bbff]" : "text-black"

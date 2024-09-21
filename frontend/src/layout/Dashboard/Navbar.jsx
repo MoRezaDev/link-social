@@ -24,7 +24,7 @@ function Navbar() {
         <ul className="flex space-x-4 text-xs h-full">
           {/* Links for Large Devices */}
           <NavLink
-            to="/dashboard/user"
+            to="/admin/dashboard/user"
             className={({ isActive }) =>
               `relative flex flex-col items-center gap-1 justify-center w-24 ${
                 isActive
@@ -38,7 +38,7 @@ function Navbar() {
           </NavLink>
 
           <NavLink
-            to="/dashboard/design"
+            to="/admin/dashboard/design"
             className={({ isActive }) =>
               `relative flex flex-col items-center gap-1 justify-center w-24 ${
                 isActive
@@ -52,7 +52,7 @@ function Navbar() {
           </NavLink>
 
           <NavLink
-            to="/dashboard/share"
+            to="/admin/dashboard/share"
             className={({ isActive }) =>
               `relative flex flex-col items-center gap-1 justify-center w-24 ${
                 isActive
@@ -66,7 +66,7 @@ function Navbar() {
           </NavLink>
 
           <NavLink
-            to="/dashboard/preview"
+            to="/admin/dashboard/preview"
             className={({ isActive }) =>
               `relative flex flex-col items-center gap-1 justify-center w-24 ${
                 isActive
