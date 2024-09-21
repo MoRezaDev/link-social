@@ -10,6 +10,7 @@ import Share from "./pages/Share";
 import Preview from "./pages/Preview";
 import User from "./pages/User";
 import Home from "./pages/Home";
+import Profile from "./pages/Profile";
 
 export const router = createBrowserRouter([
   {
@@ -57,6 +58,10 @@ export const router = createBrowserRouter([
             ],
           },
         ],
+      },
+      {
+        path: "/profile",
+        element: <Profile />,
       },
     ],
   },

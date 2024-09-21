@@ -12,6 +12,7 @@ import {
 import "../../styles/preview.css";
 
 function LinkCard({ link }) {
+  console.log(link);
   // Mapping 'content' to icons
   const iconMap = {
     instagram: <FaInstagram className="text-pink-500" />,
@@ -27,7 +28,7 @@ function LinkCard({ link }) {
     if (link.content === "phone") {
       // For phone numbers, use 'tel:' protocol
       return (
-        <a href={`tel:${link.url}`} className="text-blue-600  truncate ">
+        <a href={`tel:${link.url}`} className="text-blue-600  truncate bg-link-card ">
           {`${link.name}`}
         </a>
       );
@@ -38,19 +39,19 @@ function LinkCard({ link }) {
           href={`https://wa.me/${link.url}`}
           target="_blank"
           rel="noopener noreferrer"
-          className="text-blue-600  truncate "
+          className="text-blue-600  truncate bg-link-card "
         >
           {`${link.name}`}
         </a>
       );
     } else if (link.content === "email") {
-      // For WhatsApp numbers, use WhatsApp API
+      // For Email
       return (
         <a
           href={`mailto: ${link.url}`}
           target="_blank"
           rel="noopener noreferrer"
-          className="text-blue-600  truncate "
+          className="text-blue-600  truncate bg-link-card"
         >
           {`${link.name}`}
         </a>
@@ -62,7 +63,7 @@ function LinkCard({ link }) {
           href={`https://t.me/${link.url}`}
           target="_blank"
           rel="noopener noreferrer"
-          className="text-blue-600  truncate "
+          className="text-blue-600  truncate bg-link-card "
         >
           {`${link.name}`}
         </a>
@@ -74,7 +75,7 @@ function LinkCard({ link }) {
           href={link.url}
           target="_blank"
           rel="noopener noreferrer"
-          className="text-blue-600  truncate "
+          className="text-blue-600  truncate bg-link-card"
         >
           {link.name}
         </a>
@@ -83,9 +84,9 @@ function LinkCard({ link }) {
   };
 
   return (
-    <div className="w-full max-w-[500px] bg-white p-4 flex items-center gap-4 border shadow-md rounded-md">
+    <div className="w-full max-w-[500px] bg-white p-4 flex items-center gap-2 border shadow-md rounded-md">
       {/* Display icon based on content */}
-      <div className="text-2xl">
+      <div className="text-2xl bg-icon-card">
         {iconMap[link.content] || iconMap["other"]}{" "}
         {/* Fallback to 'other' if content is not mapped */}
       </div>

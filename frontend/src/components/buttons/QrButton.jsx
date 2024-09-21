@@ -2,6 +2,7 @@ import React, { useRef, useState } from "react";
 import { BsQrCode } from "react-icons/bs";
 import Modal from "../Modal";
 import { QRCodeCanvas } from "qrcode.react";
+import { FaTimes } from "react-icons/fa";
 
 function QrButton({ link }) {
   const [isModalOpen, setModalOpen] = useState(false);
@@ -28,15 +29,26 @@ function QrButton({ link }) {
       <Modal isOpen={isModalOpen} onClose={closeModal} modalRef={modalRef}>
         <div
           ref={modalRef}
-          className="w-full max-w-[500px] bg-white p-4 rounded-md flex flex-col items-center"
+          className="w-[80%] sm:w-full  sm:max-w-[500px] bg-white p-2 rounded-md flex flex-col items-center"
         >
-          <QRCodeCanvas
-            ref={qrRef} // Attach the ref to the QRCodeCanvas
-            size={256} // Adjust the size as needed
-            fgColor="#000000" // Foreground color
-            bgColor="#ffffff" // Background color
-            value={link}
-          />
+          <div className="w-full flex flex-col gap-2">
+            <div className="self-end">
+              <button
+                onClick={closeModal}
+                className="bg-black rounded-full text-white p-1"
+              >
+                <FaTimes className="text-lg" />
+              </button>
+            </div>
+            <QRCodeCanvas
+              className="self-center"
+              ref={qrRef} // Attach the ref to the QRCodeCanvas
+              size={256} // Adjust the size as needed
+              fgColor="#000000" // Foreground color
+              bgColor="#ffffff" // Background color
+              value={link}
+            />
+          </div>
           <button
             onClick={downloadQrCode}
             className="mt-4 bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition-all duration-300"

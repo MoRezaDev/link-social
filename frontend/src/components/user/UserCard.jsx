@@ -22,7 +22,7 @@ import { useNavigate } from "react-router-dom";
 import QrButton from "../buttons/QrButton";
 import { processLink } from "../../helper/functions";
 
-function LinkCard({ link, user }) {
+function LinkCardInside({ link, user }) {
   const { users } = useUser();
 
   const linkWithContent = processLink(link);
@@ -58,9 +58,9 @@ function LinkCard({ link, user }) {
     });
   };
   return (
-    <div className="flex justify-between items-center bg-gray-300 rounded-sm p-2 mb-2">
+    <div className="flex border border-slate-500 justify-between items-center bg-gray-300 rounded-sm p-2 mb-2">
       <div className="w-full max-w-[400px] overflow-x-auto custom-scrollbar shrink ">
-        <p> {link.url}</p>
+        <p className="text-sm font-semibold"> {link.url}</p>
         <div>{iconMap[linkWithContent.content] || iconMap["other"]}</div>
       </div>
       <div className="flex items-center justify-end gap-2 min-w-[60px]">
@@ -84,53 +84,55 @@ function LinkCard({ link, user }) {
 function UserCard({ user, onDelete }) {
   const navigate = useNavigate();
   return (
-    <div className="w-full max-w-[600px] rounded overflow-hidden shadow-lg bg-white p-4 m-4 relative">
-      {/* Header with Delete Button */}
-      <div className="flex flex-col sm:flex-row justify-between sm:items-center bg-gray-200 rounded-sm p-2 mb-2">
-        <div className="w-full sm:max-w-[450px] overflow-x-auto">
-          <div className="font-bold text-md text-gray-800">
-            User: {user.name}
+    <div className="w-full  max-w-[600px] h-[300px] p-4 m-4 shadow-lg bg-white">
+      <div className="w-full h-full overflow-auto bg-white relative custom-scrollbar">
+        {/* Header with Delete Button */}
+        <div className="flex   flex-col sm:flex-row justify-between sm:items-center bg-gray-200 rounded-sm p-2 mb-2">
+          <div className="w-full sm:max-w-[450px] overflow-x-auto">
+            <div className="font-bold text-md text-gray-800">
+              User: {user.name}
+            </div>
+            <p className="text-gray-700 text-base">
+              <a
+                href={user.url}
+                className="text-blue-500 hover:underline"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {user.url}
+              </a>
+            </p>
           </div>
-          <p className="text-gray-700 text-base">
-            <a
-              href={user.url}
-              className="text-blue-500 hover:underline"
-              target="_blank"
-              rel="noopener noreferrer"
+          <div className="flex w-fit   gap-2 p-1 bg-gray-300 items-center sm:justify-end sm:min-w-[70px]">
+            <QrButton link={user.url} />
+            <FaEye
+              onClick={() =>
+                navigate("/admin/dashboard/preview", { state: { user } })
+              }
+              className="text-[#00bbff] hover:text-blue-500 cursor-pointer"
+            />
+            <EditUserButton user={user} />
+            <button
+              onClick={() => onDelete(user)}
+              className="text-[#00bbff] hover:text-blue-500"
+              title="Delete User"
             >
-              {user.url}
-            </a>
-          </p>
+              <FaTrash size={16} />
+            </button>
+          </div>
         </div>
-        <div className="flex w-fit  gap-2 p-1 bg-gray-300 items-center sm:justify-end sm:min-w-[70px]">
-          <QrButton link={user.url} />
-          <FaEye
-            onClick={() =>
-              navigate("/admin/dashboard/preview", { state: { user } })
-            }
-            className="text-[#00bbff] hover:text-blue-500 cursor-pointer"
-          />
-          <EditUserButton user={user} />
-          <button
-            onClick={() => onDelete(user)}
-            className="text-[#00bbff] hover:text-blue-500"
-            title="Delete User"
-          >
-            <FaTrash size={16} />
-          </button>
+
+        {/* User URL */}
+        <div className="flex flex-col justify-between   bg-gray-200 rounded-sm p-2 mb-2">
+          <h1 className="text-md font-bold">Links</h1>
+          {user.links?.map((link, idx) => (
+            <LinkCardInside key={idx} link={link} user={user} />
+          ))}
         </div>
-      </div>
 
-      {/* User URL */}
-      <div className="flex flex-col justify-between  bg-gray-200 rounded-sm p-2 mb-2">
-        <h1 className="text-md font-bold">Links</h1>
-        {user.links?.map((link, idx) => (
-          <LinkCard key={idx} link={link} user={user} />
-        ))}
+        {/* Add Link Button */}
+        <AddLinksButton user={user} />
       </div>
-
-      {/* Add Link Button */}
-      <AddLinksButton user={user} />
     </div>
   );
 }

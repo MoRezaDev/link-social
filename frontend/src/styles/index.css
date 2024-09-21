@@ -5,3 +5,31 @@
 body {
   background-color: #f6f6f6;
 }
+
+/* Firefox scrollbar styles */
+.custom-scrollbar {
+  scrollbar-width: thin; /* Makes the scrollbar thinner */
+  scrollbar-color: #a0aec0 #e2e8f0; /* Thumb color and track color */
+}
+
+/* Webkit-based browsers (Chrome, Safari) */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 4px; /* This controls the scrollbar width */
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background-color: #a0aec0; /* Gray color */
+  border-radius: 10px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background-color: #708cb0;
+}
+
+.bg-link-card {
+  @apply bg-gray-200 p-1 px-3 rounded-md w-[200px] text-start font-semibold;
+}
+
+.bg-icon-card {
+  @apply bg-gray-200 p-1 px-2 rounded-md  text-start;
+}
