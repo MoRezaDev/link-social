@@ -11,7 +11,7 @@ function UserForm({ modalRef, onClose }) {
   const domain = "https://mehrgan.com";
 
   const handleCopy = () => {
-    const textToCopy = `${domain}${category ? `/${category}` : ""}/${username}`;
+    const textToCopy = `${domain}/profile?${category ? `category=${category}&` : ""}name=${username}`;
     navigator.clipboard.writeText(textToCopy).then(() => {
       toast.success("Copied to clipboard!");
     });
@@ -27,7 +27,7 @@ function UserForm({ modalRef, onClose }) {
     const newUser = {
       id: uuidv4(),
       name: username,
-      url: `${domain}${category ? `/${category}` : ""}/${username}`,
+      url: `${domain}/profile?${category ? `category=${category}&` : ""}name=${username}`,
       links: [],
     };
 
@@ -93,7 +93,7 @@ function UserForm({ modalRef, onClose }) {
             <input
               type="text"
               disabled
-              value={`${domain}${category ? `/${category}` : ""}/${username}`}
+              value={`${domain}/profile?${category ? `category=${category}&` : ""}name=${username}`}
               className="mt-1 block w-full px-3 py-2 pr-12 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm 
       bg-gray-100 overflow-x-auto whitespace-nowrap"
             />

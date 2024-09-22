@@ -84,15 +84,15 @@ function LinkCardInside({ link, user }) {
 function UserCard({ user, onDelete }) {
   const navigate = useNavigate();
   return (
-    <div className="w-full  max-w-[600px] h-[300px] p-4 m-4 shadow-lg bg-white">
+    <div className="w-full  max-w-[600px] h-[300px] p-4 m-4 shadow-lg bg-white rounded-sm">
       <div className="w-full h-full overflow-auto bg-white relative custom-scrollbar">
         {/* Header with Delete Button */}
         <div className="flex   flex-col sm:flex-row justify-between sm:items-center bg-gray-200 rounded-sm p-2 mb-2">
           <div className="w-full sm:max-w-[450px] overflow-x-auto">
-            <div className="font-bold text-md text-gray-800">
+            <div className="font-bold text-md text-gray-800 bg-gray-300 w-fit px-2 mb-1">
               User: {user.name}
             </div>
-            <p className="text-gray-700 text-base">
+            <p className="text-gray-700 text-base mb-2 sm:mb-0 bg-gray-300 w-fit px-2">
               <a
                 href={user.url}
                 className="text-blue-500 hover:underline"
@@ -103,22 +103,72 @@ function UserCard({ user, onDelete }) {
               </a>
             </p>
           </div>
-          <div className="flex w-fit   gap-2 p-1 bg-gray-300 items-center sm:justify-end sm:min-w-[70px]">
-            <QrButton link={user.url} />
-            <FaEye
-              onClick={() =>
-                navigate("/admin/dashboard/preview", { state: { user } })
-              }
-              className="text-[#00bbff] hover:text-blue-500 cursor-pointer"
-            />
-            <EditUserButton user={user} />
-            <button
-              onClick={() => onDelete(user)}
-              className="text-[#00bbff] hover:text-blue-500"
-              title="Delete User"
-            >
-              <FaTrash size={16} />
-            </button>
+
+          <div className="flex w-fit gap-2 p-1 bg-gray-300 items-center sm:justify-end sm:min-w-[125px]">
+            <div className="relative group">
+              <button
+                type="button"
+                className=" text-gray-500 hover:text-gray-700 bg-transparent"
+                onClick={() => {
+                  const textToCopy = user.url;
+                  navigator.clipboard.writeText(textToCopy).then(() => {
+                    toast.success("Copied to clipboard!");
+                  });
+                }}
+              >
+                <FaCopy size={16} />
+              </button>
+              <span className="absolute top-[110%] left-1/2 transform -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-xs bg-black text-white rounded-md p-1 w-auto min-w-[80px] text-center">
+                Copy URL
+              </span>
+            </div>
+            <div className="relative group">
+              <QrButton
+                size={16}
+                link={user.url}
+                className="text-green-500 hover:text-green-300 cursor-pointer"
+              />
+              <span className="absolute top-[110%] left-1/2 transform -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-xs bg-black text-white rounded-md p-1 w-auto min-w-[80px] text-center">
+                QR Code
+              </span>
+            </div>
+
+            <div className="relative group">
+              <FaEye
+                size={16}
+                onClick={() =>
+                  navigate("/admin/dashboard/preview", { state: { user } })
+                }
+                className="text-blue-600 hover:text-blue-400 cursor-pointer"
+              />
+              <span className="absolute top-[110%] left-1/2 transform -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-xs bg-black text-white rounded-md p-1 w-auto min-w-[80px] text-center">
+                View User
+              </span>
+            </div>
+
+            <div className="relative group">
+              <EditUserButton
+                size={16}
+                user={user}
+                className="text-yellow-500 hover:text-yellow-300 cursor-pointer"
+              />
+              <span className="absolute top-[110%] left-1/2 transform -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-xs bg-black text-white rounded-md p-1 w-auto min-w-[80px] text-center">
+                Edit User
+              </span>
+            </div>
+
+            <div className="relative group">
+              <button
+                onClick={() => onDelete(user)}
+                className="text-red-500 hover:text-red-300 cursor-pointer"
+                title="Delete User"
+              >
+                <FaTrash size={16} />
+              </button>
+              <span className="absolute top-[110%] left-1/2 transform -translate-x-[60px] opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-xs bg-black text-white rounded-md p-1 w-auto min-w-[80px] text-center">
+                Delete User
+              </span>
+            </div>
           </div>
         </div>
 

@@ -1,5 +1,6 @@
 import React, { createContext, useState, useEffect } from "react";
 import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
 // Create the context
 export const AuthContext = createContext();
@@ -14,7 +15,8 @@ const token = "2fcab58712467eab4004583eb8fb7f89";
 
 // UserContext Provider component
 export const AuthProvider = ({ children }) => {
-  const [isAuthenthicated, setIsAuthenthicated] = useState(null);
+  const [isAuthenthicated, setIsAuthenthicated] = useState(false);
+  const navigate = useNavigate();
 
   // On component mount, check if there's a auth token in localStorage
   useEffect(() => {
@@ -45,8 +47,19 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
+  const logoutHandler = () => {
+    localStorage.removeItem("auth");
+    setTimeout(() => {
+      setIsAuthenthicated(false);
+      navigate("/");
+    }, 1000);
+    toast.success("Logged out!");
+  };
+
   return (
-    <AuthContext.Provider value={{ isAuthenthicated, loginHandler }}>
+    <AuthContext.Provider
+      value={{ isAuthenthicated, loginHandler, logoutHandler }}
+    >
       {children}
     </AuthContext.Provider>
   );
