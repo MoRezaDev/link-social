@@ -16,18 +16,19 @@ const token = "2fcab58712467eab4004583eb8fb7f89";
 // UserContext Provider component
 export const AuthProvider = ({ children }) => {
   const [isAuthenthicated, setIsAuthenthicated] = useState(false);
+  const [isLoading, setIsLoading] = useState(true); // Add a loading state
   const navigate = useNavigate();
 
-  // On component mount, check if there's a auth token in localStorage
+  // On component mount, check if there's an auth token in localStorage
   useEffect(() => {
     const storedAuth = JSON.parse(localStorage.getItem("auth"));
     if (storedAuth && storedAuth.token === token) {
       setIsAuthenthicated(true);
     }
+    setIsLoading(false); // Done checking auth, set loading to false
   }, []);
 
   const loginHandler = (session) => {
-    console.log(session);
     if (
       session.username.toLowerCase() === admin.username &&
       session.password.toLowerCase() === admin.password
@@ -37,12 +38,11 @@ export const AuthProvider = ({ children }) => {
         JSON.stringify({ token: "2fcab58712467eab4004583eb8fb7f89" })
       );
       setIsAuthenthicated(true);
-      toast.success("logged in success!");
+      toast.success("Logged in successfully!");
       setTimeout(() => location.reload(), 1000);
     } else {
-      console.log("this code runs");
       localStorage.removeItem("auth");
-      toast.error("user or password is incorrect");
+      toast.error("Username or password is incorrect");
       setIsAuthenthicated(false);
     }
   };
@@ -58,7 +58,7 @@ export const AuthProvider = ({ children }) => {
 
   return (
     <AuthContext.Provider
-      value={{ isAuthenthicated, loginHandler, logoutHandler }}
+      value={{ isAuthenthicated, isLoading, loginHandler, logoutHandler }}
     >
       {children}
     </AuthContext.Provider>

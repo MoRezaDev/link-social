@@ -20,39 +20,38 @@ export const router = createBrowserRouter([
       {
         path: "/",
         element: <Home />,
-        children: [],
       },
       {
         path: "login",
         element: <Login />,
       },
       {
-        path: "/admin",
+        path: "admin",
         element: <ProtectedRoute />,
         children: [
           {
-            path: "/admin",
-            element: <Navigate to="/admin/dashboard" replace />,
+            index: true,
+            element: <Navigate to="dashboard" replace />, // Only when exactly "/admin"
           },
           {
-            path: "/admin/dashboard",
+            path: "dashboard",
             element: <DashLayout />,
             children: [
               { index: true, element: <Dashboard /> },
               {
-                path: "/admin/dashboard/user",
+                path: "user", // No leading slash here
                 element: <User />,
               },
               {
-                path: "/admin/dashboard/design",
+                path: "design",
                 element: <Design />,
               },
               {
-                path: "/admin/dashboard/share",
+                path: "share",
                 element: <Share />,
               },
               {
-                path: "/admin/dashboard/preview",
+                path: "preview",
                 element: <Preview />,
               },
             ],
@@ -60,7 +59,7 @@ export const router = createBrowserRouter([
         ],
       },
       {
-        path: "/profile",
+        path: "profile",
         element: <Profile />,
       },
     ],

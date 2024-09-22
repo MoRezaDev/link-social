@@ -3,15 +3,20 @@ import { FaTimes } from "react-icons/fa";
 import { FaCopy } from "react-icons/fa";
 import { toast } from "react-hot-toast";
 import { v4 as uuidv4 } from "uuid";
+import { useNavigate } from "react-router-dom";
 
 function UserForm({ modalRef, onClose }) {
   const [category, setCategory] = useState("");
   const [username, setUsername] = useState("");
   const [isButtonDisabled, setIsButtonDisabled] = useState(false);
+
+  const navigate = useNavigate();
   const domain = "https://mehrgan.com";
 
   const handleCopy = () => {
-    const textToCopy = `${domain}/profile?${category ? `category=${category}&` : ""}name=${username}`;
+    const textToCopy = `${domain}/profile?${
+      category ? `category=${category}&` : ""
+    }name=${username}`;
     navigator.clipboard.writeText(textToCopy).then(() => {
       toast.success("Copied to clipboard!");
     });
@@ -27,8 +32,11 @@ function UserForm({ modalRef, onClose }) {
     const newUser = {
       id: uuidv4(),
       name: username,
-      url: `${domain}/profile?${category ? `category=${category}&` : ""}name=${username}`,
+      url: `${domain}/profile?${
+        category ? `category=${category}&` : ""
+      }name=${username}`,
       links: [],
+      category: category || null,
     };
 
     const existingUsers = JSON.parse(localStorage.getItem("users")) || [];
@@ -39,7 +47,10 @@ function UserForm({ modalRef, onClose }) {
 
     setIsButtonDisabled(true);
     toast.success("Successfully Saved to local storage!");
-    setTimeout(() => location.reload(), 1000);
+    setTimeout(() => {
+      navigate("/admin/dashboard/user", { replace });
+      location.reload();
+    }, 1000);
   };
 
   return (
@@ -93,7 +104,9 @@ function UserForm({ modalRef, onClose }) {
             <input
               type="text"
               disabled
-              value={`${domain}/profile?${category ? `category=${category}&` : ""}name=${username}`}
+              value={`${domain}/profile?${
+                category ? `category=${category}&` : ""
+              }name=${username}`}
               className="mt-1 block w-full px-3 py-2 pr-12 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm 
       bg-gray-100 overflow-x-auto whitespace-nowrap"
             />

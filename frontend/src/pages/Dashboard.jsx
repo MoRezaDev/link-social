@@ -4,7 +4,7 @@ import { NavLink } from "react-router-dom";
 function Dashboard() {
   return (
     <main>
-      <section></section>
+      <section>Dashboard</section>
     </main>
   );
 }

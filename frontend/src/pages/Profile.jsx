@@ -18,6 +18,7 @@ function Profile() {
   if (!users) return <h1>Loading...</h1>;
   console.log(name);
   console.log(users);
+  console.log(category);
   let foundedUser = category
     ? users?.find((user) => user.name === name && user.category === category)
     : name
