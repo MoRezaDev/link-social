@@ -11,7 +11,7 @@ function UserForm({ modalRef, onClose }) {
   const [isButtonDisabled, setIsButtonDisabled] = useState(false);
 
   const navigate = useNavigate();
-  const domain = "https://mehrgan.com";
+  const domain = "https://biztap.ir";
 
   const handleCopy = () => {
     const textToCopy = `${domain}/profile?${
@@ -23,8 +23,6 @@ function UserForm({ modalRef, onClose }) {
   };
 
   const submitHandler = (e) => {
-    e.preventDefault();
-
     if (username.length === 0) {
       return toast.error("Username should not be empty");
     }
@@ -47,10 +45,6 @@ function UserForm({ modalRef, onClose }) {
 
     setIsButtonDisabled(true);
     toast.success("Successfully Saved to local storage!");
-    setTimeout(() => {
-      navigate("/admin/dashboard/user", { replace });
-      location.reload();
-    }, 1000);
   };
 
   return (
